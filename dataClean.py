@@ -24,33 +24,39 @@ file.drop_duplicates(inplace=True)
 file.reset_index(drop=True, inplace=True)
 
 # 选择
-feature = ['LCD','PLD','LFPD','cm3_g','ASA_m2_cm3','ASA_m2_g','AV_VF','AV_cm3_g']
-labels = ['Henry_furfural','Henry_Tip5p','Heat_furfural','Heat_Tip5p']
+feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
+           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
+labels = ['Heat_furfural']
+# labels = ['Henry_furfural','Henry_Tip5p','Heat_furfural','Heat_Tip5p']
+
 dataset = file[feature + labels]
-dataset_labels = file[labels]
+dataset.dropna(inplace=True)
 
-# print(dataset.info())
+dataset_labels = dataset[labels]
+dataset_select = dataset[feature]
 
-# print(dataset_labels.info())
+print(dataset_select.info())
+
+print(dataset_select.shape())
+print(dataset_labels.info())
+
+print(dataset_labels.shape())
 
 # 训练集测试集划分
 random_state = 42
-Xtrain, Xtest, Ytrain, Ytest = train_test_split(dataset, dataset_labels, test_size=0.25, random_state = random_state)
-
+Xtrain, Xtest, Ytrain, Ytest = train_test_split(
+    dataset_select, dataset_labels, test_size=0.25, random_state=random_state)
 
 
 # 流水线清理数据
-num_pipeline = Pipeline([
-    ('selector', DataFrameSelector(feature)),
-    ('simple_imputer', SimpleImputer(strategy="median")),
-    ('std_scaler', StandardScaler()),
-    ])
+# num_pipeline = Pipeline([
+#     ('selector', DataFrameSelector(feature)),
+#     ('simple_imputer', SimpleImputer(strategy="mean")),
+#     ('std_scaler', StandardScaler()),
+#     ])
 
-full_pipeline = FeatureUnion(transformer_list=[
-        ("num_pipeline", num_pipeline)
-    ])
+# full_pipeline = FeatureUnion(transformer_list=[
+#         ("num_pipeline", num_pipeline)
+#     ])
 
-dataset_select_prepared = full_pipeline.fit_transform(Xtrain)
-
-
-
+# dataset_select_prepared = full_pipeline.fit_transform(Xtrain)
