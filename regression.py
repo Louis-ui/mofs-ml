@@ -33,14 +33,21 @@ models = {
     "model_ExtraTreeRegressor":  ExtraTreeRegressor()
 }
 
-# print(Xtrain_prepare)
-# print(Ytrain_prepare)
+# print(len(Xtrain_prepare))
+# print(len(Ytrain_prepare))
 
-model = models["model_RandomForestRegressor"]
-model.fit(Xtrain_prepare, Ytrain_prepare.ravel())
-predictions = model.predict(Xtest_prepare)
+# model = models["model_RandomForestRegressor"]
+# model.fit(Xtrain_prepare, Ytrain_prepare.ravel())
+# predictions = model.predict(Xtest_prepare)
+
 # my_x_ticks = np.arange(-5, 10, 0.1)
 # plt.xticks(my_x_ticks)
+
+# print(len(Xtest_prepare))
+# print(len(Ytest_prepare))
+
 # plt.scatter(Xtest_prepare, Ytest_prepare, color="g")
-plt.plot(Xtest_prepare, predictions, color="r")
-plt.show()
+
+
+# plt.plot(Xtest_prepare, predictions, color="r")
+# plt.show()
