@@ -24,23 +24,33 @@ file.drop_duplicates(inplace=True)
 file.reset_index(drop=True, inplace=True)
 
 # 选择
-feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
-           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
-labels = ['Heat_furfural']
+feature = ['LCD']
+# feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
+#            'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
+labels = ['Henry_furfural']
 # labels = ['Henry_furfural','Henry_Tip5p','Heat_furfural','Heat_Tip5p']
 
 dataset = file[feature + labels]
 dataset.dropna(inplace=True)
 
-dataset_labels = dataset[labels]
-dataset_select = dataset[feature]
+# 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS
+MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
+dataset_drop_small_LCD = dataset[dataset['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
 
-print(dataset_select.info())
+dataset_labels = dataset_drop_small_LCD[labels]
+dataset_select = dataset_drop_small_LCD[feature]
 
-print(dataset_select.shape())
-print(dataset_labels.info())
+# dataset_labels['selectivity_of_Henry'] = dataset_labels.apply(lambda x: x["Henry_furfural"] / x["Henry_Tip5p"], axis=1)
+# dataset_labels['selectivity_of_Heat'] = dataset_labels.apply(lambda x: x["Heat_furfural"] / x["Heat_Tip5p"], axis=1)
+labels.append('selectivity_of_Henry')
+labels.append('selectivity_of_Heat')
 
-print(dataset_labels.shape())
+dataset_labels['Henry_furfural'] = np.log(dataset_labels['Henry_furfural'])
+# dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p'])
+
+# print(dataset_select.info())
+# print(dataset_labels.info())
+
 
 # 训练集测试集划分
 random_state = 42
@@ -49,14 +59,34 @@ Xtrain, Xtest, Ytrain, Ytest = train_test_split(
 
 
 # 流水线清理数据
-# num_pipeline = Pipeline([
-#     ('selector', DataFrameSelector(feature)),
-#     ('simple_imputer', SimpleImputer(strategy="mean")),
-#     ('std_scaler', StandardScaler()),
-#     ])
+num_pipeline = Pipeline([
+    ('selector', DataFrameSelector(feature)),
+    ('simple_imputer', SimpleImputer(strategy="mean")),
+    ('std_scaler', StandardScaler()),
+    ])
 
-# full_pipeline = FeatureUnion(transformer_list=[
-#         ("num_pipeline", num_pipeline)
-#     ])
+num_label_pipeline = Pipeline([
+    ('selector', DataFrameSelector(labels)),
+    ('simple_imputer', SimpleImputer(strategy="mean")),
+    ('std_scaler', StandardScaler()),
+    ])
 
-# dataset_select_prepared = full_pipeline.fit_transform(Xtrain)
+full_pipeline = FeatureUnion(transformer_list=[
+        ("num_pipeline", num_pipeline)
+    ])
+
+full_label_pipeline = FeatureUnion(transformer_list=[
+        ("num_pipeline", num_label_pipeline)
+    ])
+
+Xtrain_prepare = full_pipeline.fit_transform(Xtrain)
+Xtest_prepare = full_pipeline.fit_transform(Xtest)
+
+# print(Ytrain.info())
+
+for index, row in Ytrain.iterrows():
+    print(row, end=",")
+
+# Ytrain_prepare = full_label_pipeline.fit_transform(Ytrain)
+# Ytest_prepare = full_label_pipeline.fit_transform(Ytest)
+

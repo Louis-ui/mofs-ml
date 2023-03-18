@@ -14,7 +14,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pylab import mpl
-from dataClean import Xtrain, Ytrain, Xtest, Ytest
+from dataClean import Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 # 正常显示符号
@@ -33,13 +33,14 @@ models = {
     "model_ExtraTreeRegressor":  ExtraTreeRegressor()
 }
 
-print(Xtrain)
-print(Ytrain)
+# print(Xtrain_prepare)
+# print(Ytrain_prepare)
 
-model = models["model_LinearRegression"]
-model.fit(Xtrain, Ytrain)
-predictions = model.predict(Xtest)
-
-plt.scatter(Xtrain, Ytrain, color="g")
-plt.plot(Xtest, predictions, color="r")
+model = models["model_RandomForestRegressor"]
+model.fit(Xtrain_prepare, Ytrain_prepare.ravel())
+predictions = model.predict(Xtest_prepare)
+# my_x_ticks = np.arange(-5, 10, 0.1)
+# plt.xticks(my_x_ticks)
+# plt.scatter(Xtest_prepare, Ytest_prepare, color="g")
+plt.plot(Xtest_prepare, predictions, color="r")
 plt.show()
