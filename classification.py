@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report
-from dataClean import Xtrain, Ytrain, Xtest, Ytest
+from main import Xtrain, Ytrain, Xtest, Ytest
 
 
 # Classification

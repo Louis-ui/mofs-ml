@@ -5,21 +5,13 @@ from sklearn import neighbors
 from sklearn import svm
 from sklearn import tree
 from sklearn import linear_model
-from sklearn.preprocessing import PolynomialFeatures
-from sklearn.linear_model import LinearRegression
-from sklearn.pipeline import Pipeline
 from matplotlib import rcParams
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from pylab import mpl
-from dataClean import Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare
+from resultAnalysis import regressionAnalysis
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 # 正常显示符号
 rcParams['axes.unicode_minus'] = False
-
 
 models = {
     "model_LinearRegression": linear_model.LinearRegression(),
@@ -33,21 +25,23 @@ models = {
     "model_ExtraTreeRegressor":  ExtraTreeRegressor()
 }
 
-# print(len(Xtrain_prepare))
-# print(len(Ytrain_prepare))
+def regressionAndAnalysis(target_label, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare):
+    model = models[method]
+    model.fit(Xtrain_prepare, Ytrain_prepare.ravel())
+    predictions = model.predict(Xtest_prepare)
+    Ytest_prepare_list = []
+    for item in Ytest_prepare:
+        Ytest_prepare_list.append(item)
+        
+    regressionAnalysis(method, target_label, Ytest_prepare_list, predictions)
 
 # model = models["model_RandomForestRegressor"]
 # model.fit(Xtrain_prepare, Ytrain_prepare.ravel())
 # predictions = model.predict(Xtest_prepare)
 
-# my_x_ticks = np.arange(-5, 10, 0.1)
-# plt.xticks(my_x_ticks)
+# Ytest_prepare_list = []
 
-# print(len(Xtest_prepare))
-# print(len(Ytest_prepare))
+# for item in Ytest_prepare:
+#     Ytest_prepare_list.append(item)
 
-# plt.scatter(Xtest_prepare, Ytest_prepare, color="g")
-
-
-# plt.plot(Xtest_prepare, predictions, color="r")
-# plt.show()
+# regressionAnalysis(target_label[0], Ytest_prepare_list, predictions)

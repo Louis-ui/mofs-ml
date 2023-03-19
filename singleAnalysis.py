@@ -1,4 +1,4 @@
-from dataClean import dataset
+from main import dataset
 import matplotlib.pyplot as plt
 
 
