@@ -11,6 +11,7 @@ from sklearn.preprocessing import StandardScaler
 from util import DataFrameSelector
 from dataClean import initData
 from regression import regressionAndAnalysis
+from chemicalDescriptor import chemicDescriptorData_prepare
 
 # 读文件
 file = pd.read_excel("database\data.xlsx")
@@ -24,6 +25,21 @@ pd.set_option('display.float_format', lambda x: '%.2f' % x)
 file.drop_duplicates(inplace=True)
 file.reset_index(drop=True, inplace=True)
 
+# ac = 0
+
+for index, row in chemicDescriptorData_prepare.iterrows():
+    mof = row["MOF"]
+    mofName = mof[0:-4]
+    change_row = file.loc[file["filename"] == mofName]
+    change_row[0,"metal type"] = row["metal type"]
+#     for index2, row2 in file.iterrows():
+#         if(row2["filename"] == mofName):
+#             row2["metal type"] = row["metal type"]
+#             ac = ac + 1
+#             print(ac)
+
+
+
 # 初始化
 feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
            'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
@@ -32,15 +48,14 @@ labels = ['Henry_furfural','Henry_Tip5p','Heat_furfural','Heat_Tip5p']
 dataset = file[feature + labels]
 dataset.dropna(inplace=True)
 
-# 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS
-MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
-dataset_drop_small_LCD = dataset[dataset['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
+# 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS  --  有问题，应该去除苯环
+# MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
+# dataset_drop_small_LCD = dataset[dataset['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
+# dataset_labels = dataset_drop_small_LCD[labels]
+# dataset_select = dataset_drop_small_LCD[feature]
 
-dataset_labels = dataset_drop_small_LCD[labels]
-dataset_select = dataset_drop_small_LCD[feature]
-
-# dataset_labels = dataset[labels]
-# dataset_select = dataset[feature]
+dataset_labels = dataset[labels]
+dataset_select = dataset[feature]
 
 dataset_labels['Henry_furfural'] = np.log(dataset_labels['Henry_furfural'])
 dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p'])
@@ -50,18 +65,14 @@ dataset_labels['selectivity_of_Heat'] = dataset_labels.apply(lambda x: x["Heat_f
 labels.append('selectivity_of_Henry')
 labels.append('selectivity_of_Heat')
 
-# 对每一个标签都进行回归
-for item in labels:
-    #真正需要回归的目标
-    target_label = [item]
-    dataset_target_labels = dataset_labels[target_label]
-    # 初始化数据
-    Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare = initData(dataset_select, dataset_target_labels, feature, target_label)
-    # 开始训练
-    regressionAndAnalysis(target_label, "model_RandomForestRegressor" , Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare)
-    print("------分割线------")
-
-
-# target_label = ['Henry_furfural']
-# dataset_target_labels = dataset_labels[target_label]
+# # 对每一个标签都进行回归
+# for item in labels:
+#     #真正需要回归的目标
+#     target_label = [item]
+#     dataset_target_labels = dataset_labels[target_label]
+#     # 初始化数据
+#     Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare = initData(dataset_select, dataset_target_labels, feature, target_label)
+#     # 开始训练
+#     regressionAndAnalysis(target_label, "model_RandomForestRegressor" , Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare)
+#     print("------分割线------")
 
