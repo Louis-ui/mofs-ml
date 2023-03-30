@@ -11,7 +11,9 @@ from sklearn.preprocessing import StandardScaler
 from util import DataFrameSelector
 from dataClean import initData
 from regression import regressionAndAnalysis
-from chemicalDescriptor import chemicDescriptorData_prepare
+# from chemicalDescriptor import chemicDescriptorData_prepare
+
+from sklearn.preprocessing import QuantileTransformer
 
 # 读文件
 file = pd.read_excel("database\data.xlsx")
@@ -27,11 +29,13 @@ file.reset_index(drop=True, inplace=True)
 
 # ac = 0
 
-for index, row in chemicDescriptorData_prepare.iterrows():
-    mof = row["MOF"]
-    mofName = mof[0:-4]
-    change_row = file.loc[file["filename"] == mofName]
-    change_row[0,"metal type"] = row["metal type"]
+# for index, row in chemicDescriptorData_prepare.iterrows():
+#     mof = row["MOF"]
+#     mofName = mof[0:-4]
+#     change_row = file.loc[file["filename"] == mofName]
+#     change_row[0,"metal type"] = row["metal type"]
+
+
 #     for index2, row2 in file.iterrows():
 #         if(row2["filename"] == mofName):
 #             row2["metal type"] = row["metal type"]
@@ -47,6 +51,7 @@ labels = ['Henry_furfural','Henry_Tip5p','Heat_furfural','Heat_Tip5p']
 
 dataset = file[feature + labels]
 dataset.dropna(inplace=True)
+
 
 # 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS  --  有问题，应该去除苯环
 # MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
@@ -65,14 +70,23 @@ dataset_labels['selectivity_of_Heat'] = dataset_labels.apply(lambda x: x["Heat_f
 labels.append('selectivity_of_Henry')
 labels.append('selectivity_of_Heat')
 
+# 正态分布工具
+quantile_transformer = QuantileTransformer(random_state=666)
+
 # # 对每一个标签都进行回归
-# for item in labels:
-#     #真正需要回归的目标
-#     target_label = [item]
-#     dataset_target_labels = dataset_labels[target_label]
-#     # 初始化数据
-#     Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare = initData(dataset_select, dataset_target_labels, feature, target_label)
-#     # 开始训练
-#     regressionAndAnalysis(target_label, "model_RandomForestRegressor" , Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare)
-#     print("------分割线------")
+for item in labels:
+    #真正需要回归的目标
+    target_label = [item]
+    dataset_target_labels = dataset_labels[target_label]
+    # 初始化数据
+    Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare = initData(dataset_select, dataset_target_labels, feature, target_label)
+    # 正态分布
+    Xtrain_prepare = quantile_transformer.fit_transform(Xtrain_prepare)
+    Ytrain_prepare = quantile_transformer.fit_transform(Ytrain_prepare)
+    Xtest_prepare = quantile_transformer.fit_transform(Xtest_prepare)
+    Ytest_prepare = quantile_transformer.fit_transform(Ytest_prepare)
+
+    # 开始训练
+    regressionAndAnalysis(target_label, "model_RandomForestRegressor" , Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare)
+    print("------分割线------")
 
