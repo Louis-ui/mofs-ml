@@ -35,6 +35,7 @@ dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / dataset['Henry_Tip
 # 去空
 # dataset.dropna(inplace=True)
 
+
 # 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS  --  有问题，应该去除苯环
 # MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
 # dataset_drop_small_LCD = dataset[dataset['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
