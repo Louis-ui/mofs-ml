@@ -5,6 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import LabelBinarizer
 from sklearn.utils import check_array
 from scipy import sparse
+import matplotlib.pyplot as plt
 
 
 class DataFrameSelector(BaseEstimator, TransformerMixin):
@@ -34,3 +35,13 @@ class ExeLabelEncoder(BaseEstimator, TransformerMixin):
         for whlist in range(X.shape[1]):
             arr[:, whlist] = encoder.fit_transform(X[:, whlist])
         return arr
+
+
+#可视化函数
+def plot_hist(data,column):
+    plt.figure(figsize=(10,10))
+    for i in column:
+        plt.subplot(3,3,column.index(i)+1)
+        data[i].plot(kind='hist',bins=50,grid=True)
+        plt.title(i)
+    plt.show()

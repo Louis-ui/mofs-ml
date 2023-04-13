@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from mof import MOF
+from bean.mof import MOF
 from normalization import max_min_normalization
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
@@ -43,3 +43,18 @@ def initData(dataset_select, dataset_target_labels, feature, target_label):
     Ytest_prepare = full_label_pipeline.fit_transform(Ytest)
 
     return Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare
+
+def data_wash(data,column):
+    #目标值为0
+    def del_zero(data,column):
+        querySe=data[(data[column]==0)].index.tolist()
+        data_del=data.drop(querySe,axis=0)
+        return data_del
+    #目标值为None
+    def del_nan(data,column):
+        data_del=data.dropna(axis=0,how='any',subset=column)
+        return data_del
+    
+    data=del_zero(data,column)
+    data=del_nan(data,column)
+    return data
