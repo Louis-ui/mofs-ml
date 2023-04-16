@@ -1,0 +1,278 @@
+model_LinearRegression
+Henry_furfural训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.56724
+均方误差MSE: 2.45624
+平均绝对误差MAE: 1.00521
+R2: -0.23939
+Henry_ethanol训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.73331
+均方误差MSE: 3.00438
+平均绝对误差MAE: 1.11916
+R2: -0.09050
+Henry_Tip5p训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 2.83202
+均方误差MSE: 8.02031
+平均绝对误差MAE: 1.76451
+R2: -0.30128
+Heat_furfural训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.78858
+均方误差MSE: 3.19902
+平均绝对误差MAE: 1.10550
+R2: -0.01227
+Heat_Tip5p训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.96058
+均方误差MSE: 3.84388
+平均绝对误差MAE: 1.17597
+R2: -0.53243
+Hr_fur/tip5训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.80340
+均方误差MSE: 3.25226
+平均绝对误差MAE: 1.01114
+R2: -0.49832
+Hr_eth/tip5训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.08306
+均方误差MSE: 1.17301
+平均绝对误差MAE: 0.69627
+R2: -0.05787
+
+
+
+
+model_DecisionTreeRegressor
+Henry_furfural训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.03693
+均方误差MSE: 1.07523
+平均绝对误差MAE: 0.76416
+R2: 0.45745
+Henry_ethanol训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.35684
+均方误差MSE: 1.84100
+平均绝对误差MAE: 0.86310
+R2: 0.33177
+Henry_Tip5p训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 2.17293
+均方误差MSE: 4.72164
+平均绝对误差MAE: 1.28431
+R2: 0.23392
+Heat_furfural训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.59871
+均方误差MSE: 2.55587
+平均绝对误差MAE: 0.96192
+R2: 0.19125
+Heat_Tip5p训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.31460
+均方误差MSE: 1.72816
+平均绝对误差MAE: 0.82040
+R2: 0.31104
+Hr_fur/tip5训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.37611
+均方误差MSE: 1.89369
+平均绝对误差MAE: 0.94842
+R2: 0.12757
+Hr_eth/tip5训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 0.79080
+均方误差MSE: 0.62536
+平均绝对误差MAE: 0.58199
+R2: 0.43603
+
+
+
+
+model_KNeighborsRegressor
+Henry_furfural训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1.04668
+均方误差MSE: 1.09554
+平均绝对误差MAE: 0.80226
+R2: 0.44720
+Henry_ethanol训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1.26336
+均方误差MSE: 1.59608
+平均绝对误差MAE: 0.88444
+R2: 0.42067
+Henry_Tip5p训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 2.06189
+均方误差MSE: 4.25138
+平均绝对误差MAE: 1.30185
+R2: 0.31022
+Heat_furfural训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1.50861
+均方误差MSE: 2.27591
+平均绝对误差MAE: 0.95728
+R2: 0.27983
+Heat_Tip5p训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1.37747
+均方误差MSE: 1.89743
+平均绝对误差MAE: 0.88387
+R2: 0.24356
+Hr_fur/tip5训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1.43520
+均方误差MSE: 2.05979
+平均绝对误差MAE: 1.01407
+R2: 0.05105
+Hr_eth/tip5训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 0.71664
+均方误差MSE: 0.51357
+平均绝对误差MAE: 0.54606
+R2: 0.53684
+
+
+
+
+model_RandomForestRegressor
+Henry_furfural训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.93790
+均方误差MSE: 0.87965
+平均绝对误差MAE: 0.71935
+R2: 0.55614
+Henry_ethanol训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 1.06372
+均方误差MSE: 1.13150
+平均绝对误差MAE: 0.70884
+R2: 0.58930
+Henry_Tip5p训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 2.11528
+均方误差MSE: 4.47440
+平均绝对误差MAE: 1.26031
+R2: 0.27404
+Heat_furfural训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 1.53175
+均方误差MSE: 2.34627
+平均绝对误差MAE: 0.88326
+R2: 0.25757
+Heat_Tip5p训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 1.20991
+均方误差MSE: 1.46389
+平均绝对误差MAE: 0.77401
+R2: 0.41639
+Hr_fur/tip5训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 1.34698
+均方误差MSE: 1.81434
+平均绝对误差MAE: 0.73155
+R2: 0.16413
+Hr_eth/tip5训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.51478
+均方误差MSE: 0.26500
+平均绝对误差MAE: 0.42280
+R2: 0.76102
+
+
+
+
+model_BaggingRegressor
+Henry_furfural训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.85943
+均方误差MSE: 0.73862
+平均绝对误差MAE: 0.66058
+R2: 0.62730
+Henry_ethanol训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.98148
+均方误差MSE: 0.96330
+平均绝对误差MAE: 0.63114
+R2: 0.65035
+Henry_Tip5p训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 2.00313
+均方误差MSE: 4.01255
+平均绝对误差MAE: 1.23884
+R2: 0.34897
+Heat_furfural训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 1.49642
+均方误差MSE: 2.23927
+平均绝对误差MAE: 0.87651
+R2: 0.29143
+Heat_Tip5p训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 1.09335
+均方误差MSE: 1.19541
+平均绝对误差MAE: 0.75168
+R2: 0.52343
+Hr_fur/tip5训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 1.40391
+均方误差MSE: 1.97096
+平均绝对误差MAE: 0.76134
+R2: 0.09198
+Hr_eth/tip5训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.47895
+均方误差MSE: 0.22939
+平均绝对误差MAE: 0.37391
+R2: 0.79312
+
+
+
+
+model_ExtraTreeRegressor
+Henry_furfural训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.61103
+均方误差MSE: 2.59543
+平均绝对误差MAE: 0.95422
+R2: -0.30962
+Henry_ethanol训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.65017
+均方误差MSE: 2.72307
+平均绝对误差MAE: 0.95898
+R2: 0.01160
+Henry_Tip5p训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 2.75754
+均方误差MSE: 7.60404
+平均绝对误差MAE: 1.45403
+R2: -0.23374
+Heat_furfural训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 2.19972
+均方误差MSE: 4.83876
+平均绝对误差MAE: 1.22702
+R2: -0.53113
+Heat_Tip5p训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.66481
+均方误差MSE: 2.77160
+平均绝对误差MAE: 0.87719
+R2: -0.10495
+Hr_fur/tip5训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 2.03828
+均方误差MSE: 4.15458
+平均绝对误差MAE: 1.16888
+R2: -0.91402
+Hr_eth/tip5训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.81466
+均方误差MSE: 3.29299
+平均绝对误差MAE: 1.07266
+R2: -1.96974
