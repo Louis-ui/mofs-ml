@@ -55,7 +55,7 @@ dataset = df
 
 # 初始化
 feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
-           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g', 'metal type']
+           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g', 'symbols_counts']
 labels = ['Henry_furfural', 'Henry_Tip5p', 'Heat_furfural', 'Heat_Tip5p']
 
 column = feature + labels
@@ -80,18 +80,18 @@ dataset_labels['selectivity_of_Henry'] = np.log(
     dataset_labels['selectivity_of_Henry']+1)
 
 # 移除低方差特征
-sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
-sel.fit_transform(dataset_select)
+# sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
+# sel.fit_transform(dataset_select)
 
 # 数据划分
 X_train, X_test, Y_train, Y_test = split(
     dataset_select, dataset_labels, test_size=0.2)
 
 # 归一化特征
-std = StandardScaler()
-scaler = std.fit(X_train)
-X_train = scaler.transform(X_train)
-X_test = scaler.transform(X_test)
+# std = StandardScaler()
+# scaler = std.fit(X_train)
+# X_train = scaler.transform(X_train)
+# X_test = scaler.transform(X_test)
 
 # 数据预处理
 X_train, X_test = imp(X_train, X_test)

@@ -25,16 +25,27 @@ models = {
     "model_ExtraTreeRegressor":  ExtraTreeRegressor()
 }
 
+
 def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare):
-    for function in models:
-        model = models[function]
-        print(function)
-    # model = models[method]
-        model.fit(Xtrain_prepare, Ytrain_prepare)
-        predictions = model.predict(Xtest_prepare)
-        for index in range(Ytest_prepare.shape[1]):
-            target_label = [target_labels[index]]
-            regressionAnalysis(function, target_label, Ytest_prepare[:,index], predictions[:,index])
+    model = models[method]
+    model.fit(Xtrain_prepare, Ytrain_prepare)
+    predictions = model.predict(Xtest_prepare)
+    for index in range(Ytest_prepare.shape[1]):
+        target_label = [target_labels[index]]
+        regressionAnalysis(method, target_label,
+                           Ytest_prepare[:, index], predictions[:, index])
+
+
+# def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare):
+#     for function in models:
+#         model = models[function]
+#         print(function)
+#     # model = models[method]
+#         model.fit(Xtrain_prepare, Ytrain_prepare)
+#         predictions = model.predict(Xtest_prepare)
+#         for index in range(Ytest_prepare.shape[1]):
+#             target_label = [target_labels[index]]
+#             regressionAnalysis(function, target_label, Ytest_prepare[:,index], predictions[:,index])
 
 # model = models["model_RandomForestRegressor"]
 # model.fit(Xtrain_prepare, Ytrain_prepare.ravel())
