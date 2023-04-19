@@ -7,7 +7,7 @@ from sklearn import tree
 from sklearn import linear_model
 from matplotlib import rcParams
 from pylab import mpl
-from resultAnalysis import regressionAnalysis
+from resultAnalysis import *
 
 mpl.rcParams['font.sans-serif'] = ['SimHei']
 # 正常显示符号
@@ -26,7 +26,7 @@ models = {
 }
 
 
-def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare):
+def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare, X_data):
     model = models[method]
     model.fit(Xtrain_prepare, Ytrain_prepare)
     predictions = model.predict(Xtest_prepare)
@@ -34,6 +34,8 @@ def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare,
         target_label = [target_labels[index]]
         regressionAnalysis(method, target_label,
                            Ytest_prepare[:, index], predictions[:, index])
+        # 特征重要程度分析
+        important(X_data, model)
 
 
 # def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare):
