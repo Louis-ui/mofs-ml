@@ -1,3 +1,4 @@
+import warnings
 import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,6 +7,10 @@ from dataClean import data_wash
 from regression import regressionAndAnalysis
 from DataPreprocessing import *
 from resultAnalysis import *
+from sklearn.preprocessing import StandardScaler
+from sklearn.feature_selection import VarianceThreshold
+
+warnings.filterwarnings('ignore')
 
 # 读文件
 file = pd.read_excel("database\data.xlsx")
@@ -53,8 +58,7 @@ dataset_labels = dataset[labels]
 
 dataset_labels['Henry_furfural'] = np.log(dataset_labels['Henry_furfural'] + 1)
 dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p']+1)
-dataset_labels['selectivity_of_Henry'] = np.log(
-    dataset_labels['selectivity_of_Henry']+1)
+dataset_labels['selectivity_of_Henry'] = np.log(dataset_labels['selectivity_of_Henry']+1)
 
 # # 回归分析散点图，展示不同变量之间的关系
 
@@ -97,27 +101,16 @@ dataset_labels['selectivity_of_Henry'] = np.log(
 # plt.plot(dataset['Henry_furfural'])
 # plt.show()
 
-
 #移除低方差特征
-from sklearn.feature_selection import VarianceThreshold
-sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
-sel.fit_transform(dataset_select)
+# sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
+# sel.fit_transform(dataset_select)
 
-# 数据划分
-X_train, X_test, Y_train, Y_test = split(dataset_select, dataset_labels, test_size=0.2)
+for name in labels:
+    dataset_labels_name = [name]
+    dataset_labels_want = dataset_labels[name]
 
-#归一化特征
-from sklearn.preprocessing import StandardScaler
-std = StandardScaler()
-scaler= std.fit(X_train)
-X_train=scaler.transform(X_train)
-X_test=scaler.transform(X_test)
+    # 数据预处理
+    X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels_want, test_size=0.2)
 
-# 数据预处理
-X_train , X_test = imp(X_train, X_test)
-X_train , X_test = scale(X_train, X_test)
-Y_train, Y_test = normal_qt(Y_train, Y_test)
-# Y_train, Y_test = scale(Y_train, Y_test)
-
-# 训练分析
-regressionAndAnalysis(labels, "model_RandomForestRegressor" , X_train, Y_train, X_test, Y_test, dataset_select)
+    # 训练分析
+    regressionAndAnalysis(dataset_labels_name, "model_RandomForestRegressor" , X_train, Y_train, X_test, Y_test, dataset_select)
