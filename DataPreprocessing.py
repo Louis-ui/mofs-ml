@@ -1,11 +1,11 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
-from sklearn import preprocessing
 from sklearn.preprocessing import QuantileTransformer
 from sklearn.preprocessing import PowerTransformer
 from sklearn.preprocessing import QuantileTransformer
 from sklearn.preprocessing import PowerTransformer
+from sklearn.preprocessing import StandardScaler
 
 # 数据划分
 def split(X, y, test_size=0.2):
@@ -24,7 +24,7 @@ def imp(Xtrain, Xtest):
 
 # 特征缩放
 def scale(Xtrain, Xtest):
-    scaler = preprocessing.StandardScaler().fit(Xtrain)
+    scaler = StandardScaler().fit(Xtrain)
     X_train_std = scaler.transform(Xtrain)
     X_test_std = scaler.transform(Xtest)
     return X_train_std, X_test_std

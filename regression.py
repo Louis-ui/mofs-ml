@@ -32,8 +32,9 @@ def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare,
     predictions = model.predict(Xtest_prepare)
     for index in range(Ytest_prepare.shape[1]):
         target_label = [target_labels[index]]
-        regressionAnalysis(method, target_label,
-                           Ytest_prepare[:, index], predictions[:, index])
+        regressionAnalysis(method, target_label, Ytest_prepare, predictions)
+        # regressionAnalysis(method, target_label,
+        #                    Ytest_prepare[:, index], predictions[:, index])
 
 
 # def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare):

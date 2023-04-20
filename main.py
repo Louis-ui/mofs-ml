@@ -1,9 +1,12 @@
+import warnings
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from dataClean import data_wash
 from regression import regressionAndAnalysis
 from DataPreprocessing import *
+
+warnings.filterwarnings('ignore')
 
 # 读文件
 file = pd.read_excel("database\data.xlsx")
@@ -20,17 +23,18 @@ file.reset_index(drop=True, inplace=True)
 # 初始化
 feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
            'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
-labels = ['Henry_furfural', 'Henry_Tip5p', 'Heat_furfural', 'Heat_Tip5p']
+# labels = ['Henry_furfural', 'Henry_Tip5p', 'Heat_furfural', 'Heat_Tip5p']
+labels = ['Henry_furfural']
 
 column = feature + labels
 
 dataset = file[column]
 
-labels += ['selectivity_of_Henry']
+# labels += ['selectivity_of_Henry']
 
-column += ['selectivity_of_Henry']
+# column += ['selectivity_of_Henry']
 
-dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / dataset['Henry_Tip5p']
+# dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / dataset['Henry_Tip5p']
 
 # 去空
 # dataset.dropna(inplace=True)
@@ -49,9 +53,9 @@ dataset_select = dataset[feature]
 dataset_labels = dataset[labels]
 
 dataset_labels['Henry_furfural'] = np.log(dataset_labels['Henry_furfural'] + 1)
-dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p']+1)
-dataset_labels['selectivity_of_Henry'] = np.log(
-    dataset_labels['selectivity_of_Henry']+1)
+# dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p']+1)
+# dataset_labels['selectivity_of_Henry'] = np.log(
+#     dataset_labels['selectivity_of_Henry']+1)
 
 #移除低方差特征
 from sklearn.feature_selection import VarianceThreshold
@@ -60,13 +64,6 @@ sel.fit_transform(dataset_select)
 
 # 数据划分
 X_train, X_test, Y_train, Y_test = split(dataset_select, dataset_labels, test_size=0.2)
-
-#归一化特征
-from sklearn.preprocessing import StandardScaler
-std = StandardScaler()
-scaler= std.fit(X_train)
-X_train=scaler.transform(X_train)
-X_test=scaler.transform(X_test)
 
 # 数据预处理
 X_train , X_test = imp(X_train, X_test)
