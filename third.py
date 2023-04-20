@@ -2,7 +2,7 @@
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import VarianceThreshold
 from DataPreprocessing import *
-from dataClean import data_wash
+from dataClean import *
 import pandas as pd
 import matplotlib.pyplot as plt
 import warnings
@@ -68,16 +68,13 @@ dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / \
     dataset['Henry_Tip5p']
 
 # 清洗
-for item in labels:
-    dataset = data_wash(dataset, item)
+for item in column:
+    dataset = data_wash_delete(dataset, item)
 
-dataset_select = dataset[feature]
-dataset_labels = dataset[labels]
-
-dataset_labels['Henry_furfural'] = np.log(dataset_labels['Henry_furfural'] + 1)
-dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p']+1)
-dataset_labels['selectivity_of_Henry'] = np.log(
-    dataset_labels['selectivity_of_Henry']+1)
+dataset['Henry_furfural'] = np.log(dataset['Henry_furfural'] + 1)
+dataset['Henry_Tip5p'] = np.log(dataset['Henry_Tip5p']+1)
+dataset['selectivity_of_Henry'] = np.log(
+    dataset['selectivity_of_Henry']+1)
 
 # 移除低方差特征
 # sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
@@ -90,13 +87,28 @@ dataset_labels['selectivity_of_Henry'] = np.log(
 # regressionAndAnalysis(labels, "model_RandomForestRegressor",
 #                       X_train, Y_train, X_test, Y_test, dataset_select)
 
-print(dataset.info)     #10098
-
 # 真正想训练的内容
 # for i in labels:
 #     true_label = [i]
 #     dataset_select = dataset[feature]
 #     dataset_labels = dataset[true_label]
-#     X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+#     X_train, X_test, Y_train, Y_test = pp(dataset_select, dataset_labels, test_size=0.2)
 #     singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_test, dataset_select)
-#     # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+    # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+
+
+# 真正想训练的内容
+true_label = ['Heat_furfural']
+dataset_select = dataset[feature]
+dataset_labels = dataset[true_label]
+X_train, X_test, Y_train, Y_test = pp(dataset_select, dataset_labels, test_size=0.2)
+singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+
+
+print('-------------------------------------------------------------------------------------------')
+
+true_label = ['selectivity_of_Henry']
+dataset_select = dataset[feature]
+dataset_labels = dataset[true_label]
+X_train, X_test, Y_train, Y_test = pp(dataset_select, dataset_labels, test_size=0.2)
+singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)

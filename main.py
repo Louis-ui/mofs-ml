@@ -3,7 +3,7 @@ import seaborn as sns
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from dataClean import data_wash
+from dataClean import *
 from regression import *
 from DataPreprocessing import *
 from resultAnalysis import *
@@ -41,28 +41,40 @@ column += ['selectivity_of_Henry']
 dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / \
     dataset['Henry_Tip5p']
 
-# 清洗
-for item in labels:
-    dataset = data_wash(dataset, item)
-
-dataset['Henry_furfural'] = np.log(dataset['Henry_furfural'] + 1)
+dataset['Henry_furfural'] = np.log(dataset['Henry_furfural']+1)
 dataset['Henry_Tip5p'] = np.log(dataset['Henry_Tip5p']+1)
 dataset['selectivity_of_Henry'] = np.log(dataset['selectivity_of_Henry']+1)
 
-# # 真正想训练的内容
+# print(dataset.describe())  # 10143
+
+# 清洗
+for item in column:
+    dataset = data_wash_delete(dataset, item)
+
+# print(dataset.describe())  # 9281
+
+# 真正想训练的内容
 # for i in labels:
 #     true_label = [i]
 #     dataset_select = dataset[feature]
 #     dataset_labels = dataset[true_label]
-#     X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
-#     singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_test, dataset_select)
-#     # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+#     X_train, X_test, Y_train, Y_test = pp(
+#         dataset_select, dataset_labels, test_size=0.2)
+#     singleRA(true_label, "model_RandomForestRegressor",
+#              X_train, Y_train, X_test, Y_test, dataset_select)
+    # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
 
 # 真正想训练的内容
-true_label = ['Henry_furfural']
+true_label = ['Heat_furfural']
 dataset_select = dataset[feature]
 dataset_labels = dataset[true_label]
-X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+X_train, X_test, Y_train, Y_test = pp(dataset_select, dataset_labels, test_size=0.2)
+singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_test, dataset_select)
+
+true_label = ['selectivity_of_Henry']
+dataset_select = dataset[feature]
+dataset_labels = dataset[true_label]
+X_train, X_test, Y_train, Y_test = pp(dataset_select, dataset_labels, test_size=0.2)
 singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_test, dataset_select)
 
 # labels = ['selectivity_of_Henry']
@@ -86,11 +98,3 @@ singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_t
 # 移除低方差特征
 # sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
 # sel.fit_transform(dataset_select)
-
-# # 数据预处理
-# X_train, X_test, Y_train, Y_test = preprocessing(
-#     dataset_select, dataset_labels, test_size=0.2)
-
-# # 训练分析
-# singleRA(labels, "model_RandomForestRegressor", X_train,
-#          Y_train, X_test, Y_test, dataset_select)
