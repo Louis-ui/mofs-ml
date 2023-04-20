@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import warnings
 
-from regression import regressionAndAnalysis
+from regression import *
 warnings.filterwarnings('ignore')
 plt.rcParams['font.sans-serif'] = ['SimHei']
 plt.rcParams['axes.unicode_minus'] = False
@@ -55,7 +55,7 @@ dataset = df
 
 # 初始化
 feature = ['LCD', 'PLD', 'LFPD', 'cm3_g',
-           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g', 'symbols_counts']
+           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g', 'symbols_counts', ' H','C','N']
 labels = ['Henry_furfural', 'Henry_Tip5p', 'Heat_furfural', 'Heat_Tip5p']
 
 column = feature + labels
@@ -83,22 +83,19 @@ dataset_labels['selectivity_of_Henry'] = np.log(
 # sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
 # sel.fit_transform(dataset_select)
 
-# 数据划分
-X_train, X_test, Y_train, Y_test = split(
-    dataset_select, dataset_labels, test_size=0.2)
+# # 数据划分
+# X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
 
-# 归一化特征
-# std = StandardScaler()
-# scaler = std.fit(X_train)
-# X_train = scaler.transform(X_train)
-# X_test = scaler.transform(X_test)
+# # 训练分析
+# regressionAndAnalysis(labels, "model_RandomForestRegressor",
+#                       X_train, Y_train, X_test, Y_test, dataset_select)
 
-# 数据预处理
-X_train, X_test = imp(X_train, X_test)
-X_train, X_test = scale(X_train, X_test)
-Y_train, Y_test = normal_qt(Y_train, Y_test)
-# Y_train, Y_test = scale(Y_train, Y_test)
 
-# 训练分析
-regressionAndAnalysis(labels, "model_RandomForestRegressor",
-                      X_train, Y_train, X_test, Y_test)
+# 真正想训练的内容
+for i in labels:
+    true_label = [i]
+    dataset_select = dataset[feature]
+    dataset_labels = dataset[true_label]
+    X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+    singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_test, dataset_select)
+    # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
