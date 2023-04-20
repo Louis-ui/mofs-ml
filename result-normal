@@ -1,0 +1,197 @@
+Henry_furfural训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.690222
+R2: 0.301404
+Henry_furfural训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.395723
+R2: 0.523638
+Henry_furfural训练的结果
+使用model_SVR训练
+均方根误差RMSE: 1.218484
+R2: 0.636940
+Henry_furfural训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1.152997
+R2: 0.674917
+Henry_furfural训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 1.059502
+R2: 0.725500
+Henry_furfural训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 1.299145
+R2: 0.587282
+Henry_furfural训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 1.105619
+R2: 0.701084
+Henry_furfural训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 1.085132
+R2: 0.712059
+Henry_furfural训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.415956
+R2: 0.509727
+
+
+
+
+Henry_Tip5p训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.029911
+R2: 0.296446
+Henry_Tip5p训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.163230
+R2: 0.102510
+Henry_Tip5p训练的结果
+使用model_SVR训练
+均方根误差RMSE: 0.935658
+R2: 0.419325
+Henry_Tip5p训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 0.834682
+R2: 0.537895
+Henry_Tip5p训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.841973
+R2: 0.529786
+Henry_Tip5p训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 0.951888
+R2: 0.399006
+Henry_Tip5p训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 0.846062
+R2: 0.525209
+Henry_Tip5p训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.868557
+R2: 0.499626
+Henry_Tip5p训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.110802
+R2: 0.181589
+
+
+
+
+Heat_furfural训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 0.925730
+R2: 0.123524
+Heat_furfural训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 0.889277
+R2: 0.191191
+Heat_furfural训练的结果
+使用model_SVR训练
+均方根误差RMSE: 0.718684
+R2: 0.471739
+Heat_furfural训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 0.690991
+R2: 0.511666
+Heat_furfural训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.664205
+R2: 0.548792
+Heat_furfural训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 0.859353
+R2: 0.244707
+Heat_furfural训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 0.689189
+R2: 0.514210
+Heat_furfural训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.670326
+R2: 0.540438
+Heat_furfural训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 0.869926
+R2: 0.226008
+
+
+
+
+
+Heat_Tip5p训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 0.723563
+R2: 0.477722
+Heat_Tip5p训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 0.894470
+R2: 0.201859
+Heat_Tip5p训练的结果
+使用model_SVR训练
+均方根误差RMSE: 0.699076
+R2: 0.512475
+Heat_Tip5p训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 0.671719
+R2: 0.549885
+Heat_Tip5p训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.674852
+R2: 0.545676
+Heat_Tip5p训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 0.929838
+R2: 0.137492
+Heat_Tip5p训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 0.687085
+R2: 0.529056
+Heat_Tip5p训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.686750
+R2: 0.529515
+Heat_Tip5p训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 0.883856
+R2: 0.220688
+
+
+
+
+selectivity_of_Henry训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 1.546893
+R2: 0.227666
+selectivity_of_Henry训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 1.212662
+R2: 0.525361
+selectivity_of_Henry训练的结果
+使用model_SVR训练
+均方根误差RMSE: 1.042981
+R2: 0.648895
+selectivity_of_Henry训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 0.962331
+R2: 0.701095
+selectivity_of_Henry训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.893546
+R2: 0.742298
+selectivity_of_Henry训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 1.172594
+R2: 0.556207
+selectivity_of_Henry训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 0.947485
+R2: 0.710246
+selectivity_of_Henry训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.929190
+R2: 0.721328
+selectivity_of_Henry训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 1.188990
+R2: 0.543710

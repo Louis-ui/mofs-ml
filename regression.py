@@ -16,11 +16,11 @@ rcParams['axes.unicode_minus'] = False
 models = {
     "model_LinearRegression": linear_model.LinearRegression(),
     "model_DecisionTreeRegressor": tree.DecisionTreeRegressor(),
-    # "model_SVR": svm.SVR(),
+    "model_SVR": svm.SVR(),
     "model_KNeighborsRegressor": neighbors.KNeighborsRegressor(),
     "model_RandomForestRegressor": ensemble.RandomForestRegressor(n_estimators=20),
-    # "model_AdaBoostRegressor": ensemble.AdaBoostRegressor(n_estimators=50),
-    # "model_GradientBoostingRegressor": ensemble.GradientBoostingRegressor(n_estimators=100),
+    "model_AdaBoostRegressor": ensemble.AdaBoostRegressor(n_estimators=50),
+    "model_GradientBoostingRegressor": ensemble.GradientBoostingRegressor(n_estimators=100),
     "model_BaggingRegressor": BaggingRegressor(),
     "model_ExtraTreeRegressor":  ExtraTreeRegressor()
 }
@@ -43,7 +43,19 @@ def singleRA(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepar
         target_label = [target_labels[index]]
         regressionAnalysis(method, target_label, Ytest_prepare, predictions)
         # 特征重要程度分析
-        important(X_data, model)
+        # important(X_data, model)
+        importantWithShape(x_data=X_data, model=model)
+
+def singleRAWithDiffModel(target_labels, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare, X_data):
+    for function in models:
+        model = models[function]
+        model.fit(Xtrain_prepare, Ytrain_prepare)
+        predictions = model.predict(Xtest_prepare)
+        for index in range(Ytest_prepare.shape[1]):
+            target_label = [target_labels[index]]
+            regressionAnalysis(function, target_label, Ytest_prepare, predictions)
+            # 特征重要程度分析
+            # important(X_data, model)        
 
 # def regressionAnalysis(method, target, y_true, y_pred):
 

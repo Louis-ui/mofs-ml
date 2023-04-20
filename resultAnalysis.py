@@ -1,6 +1,8 @@
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import matplotlib.pyplot as plt
 import numpy as np
+import shap
+import pandas as pd
 
 def regressionAnalysis(method, target, y_true, y_pred):
 
@@ -40,3 +42,19 @@ def important(x_data, model):
     plt.xticks(range(x_data.shape[1]), features_name[indices], rotation=45, fontsize=8)
     plt.xlim([-1, x_data.shape[1]])
     plt.show()
+
+def calc_feature_importance_shap(tree_model, data):
+    """
+    计算特征重要性（SHAP）
+    :param tree_model: 树模型
+    :param data: 特征数据
+    :returns: 特征重要度
+    """
+    explainer = shap.TreeExplainer(tree_model)
+    shap_values = explainer.shap_values(data)
+    shap_values_df = pd.DataFrame(shap_values)
+    shap.summary_plot(shap_values, data)
+    return shap_values_df.abs().mean(axis=0)
+
+def importantWithShape(x_data, model):
+    calc_feature_importance_shap(tree_model=model, data=x_data)
