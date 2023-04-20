@@ -84,34 +84,38 @@ def preprocessing(dataset_select, dataset_labels, test_size=0.2):
     # 数据划分
     X_train, X_test, Y_train, Y_test = split(
         dataset_select, dataset_labels, test_size)
+    
+    X_train , X_test = imp(X_train, X_test)
+    X_train , X_test = scale(X_train, X_test)
+    Y_train, Y_test = normal_qt(Y_train, Y_test)
 
-    x_train_raw = X_train.copy()
-    x_test_raw = X_test.copy()
+    # x_train_raw = X_train.copy()
+    # x_test_raw = X_test.copy()
 
-    # 数据预处理
-    X_train, X_test = imp(X_train, X_test)
-    X_train, X_test = scale(X_train, X_test)
-    X_train, X_test = quantile(X_train, X_test)
-    X_train, X_test = minScale(X_train, X_test)
+    # # 数据预处理
+    # X_train, X_test = imp(X_train, X_test)
+    # X_train, X_test = scale(X_train, X_test)
+    # X_train, X_test = quantile(X_train, X_test)
+    # X_train, X_test = minScale(X_train, X_test)
 
-    # # 找出离群值的索引，假设大于3或小于-3的值是离群值
-    outlier_index_train = np.where(np.abs(X_train) > 3)
-    outlier_index_test = np.where(np.abs(X_test) > 3)
-    print("Train Outlier Index:", outlier_index_train)
-    print("Test Outlier Index:", outlier_index_test)
+    # # # 找出离群值的索引，假设大于3或小于-3的值是离群值
+    # outlier_index_train = np.where(np.abs(X_train) > 3)
+    # outlier_index_test = np.where(np.abs(X_test) > 3)
+    # print("Train Outlier Index:", outlier_index_train)
+    # print("Test Outlier Index:", outlier_index_test)
 
-    # # 删除原数据中对应的行
-    x_train_raw = np.delete(x_train_raw, outlier_index_train[0], axis=0)
-    Y_train = np.delete(Y_train, outlier_index_train[0], axis=0)
-    x_test_raw = np.delete(x_test_raw, outlier_index_test[0], axis=0)
-    Y_test = np.delete(Y_test, outlier_index_test[0], axis=0)
-    x_train_raw = x_train_raw.reset_index(drop=True)
-    x_test_raw = x_test_raw.reset_index(drop=True)
-    Y_train = Y_train.reset_index(drop=True)
-    Y_test = Y_test.reset_index(drop=True)
+    # # # 删除原数据中对应的行
+    # x_train_raw = np.delete(x_train_raw, outlier_index_train[0], axis=0)
+    # Y_train = np.delete(Y_train, outlier_index_train[0], axis=0)
+    # x_test_raw = np.delete(x_test_raw, outlier_index_test[0], axis=0)
+    # Y_test = np.delete(Y_test, outlier_index_test[0], axis=0)
+    # x_train_raw = x_train_raw.reset_index(drop=True)
+    # x_test_raw = x_test_raw.reset_index(drop=True)
+    # Y_train = Y_train.reset_index(drop=True)
+    # Y_test = Y_test.reset_index(drop=True)
 
-    X_train, X_test = imp(x_train_raw, x_test_raw)
-    X_train, X_test = scale(x_train_raw, x_test_raw)
-    X_train, X_test = minScale(X_train, X_test)
+    # X_train, X_test = imp(x_train_raw, x_test_raw)
+    # X_train, X_test = scale(x_train_raw, x_test_raw)
+    # X_train, X_test = minScale(X_train, X_test)
 
     return X_train, X_test, Y_train, Y_test

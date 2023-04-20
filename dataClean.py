@@ -45,6 +45,11 @@ def initData(dataset_select, dataset_target_labels, feature, target_label):
     return Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare
 
 def data_wash(data,column):
+
+    # 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS  --  有问题，应该去除苯环
+    # MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
+    # data = data[data['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
+
     #目标值为0
     def del_zero(data,column):
         querySe=data[(data[column]==0)].index.tolist()

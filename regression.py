@@ -34,6 +34,17 @@ def regressionAndAnalysis(target_labels, method, Xtrain_prepare, Ytrain_prepare,
     # 特征重要程度分析
     important(X_data, model)
 
+
+def singleRA(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare, X_data):
+    model = models[method]
+    model.fit(Xtrain_prepare, Ytrain_prepare)
+    predictions = model.predict(Xtest_prepare)
+    for index in range(Ytest_prepare.shape[1]):
+        target_label = [target_labels[index]]
+        regressionAnalysis(method, target_label, Ytest_prepare, predictions)
+        # 特征重要程度分析
+        important(X_data, model)
+
 # def regressionAnalysis(method, target, y_true, y_pred):
 
 #     print('%s训练的结果' % target[0])

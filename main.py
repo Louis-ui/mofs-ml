@@ -4,11 +4,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from dataClean import data_wash
-from regression import regressionAndAnalysis
+from regression import *
 from DataPreprocessing import *
 from resultAnalysis import *
 from sklearn.preprocessing import StandardScaler
 from sklearn.feature_selection import VarianceThreshold
+from util import whatData
 
 warnings.filterwarnings('ignore')
 
@@ -40,59 +41,32 @@ column += ['selectivity_of_Henry']
 dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / \
     dataset['Henry_Tip5p']
 
-# 去空
-# dataset.dropna(inplace=True)
-
-# 清除LCD小于糠醛分子的动力学直径（5.7）的MOFS  --  有问题，应该去除苯环
-# MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
-# dataset_drop_small_LCD = dataset[dataset['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
-# dataset_labels = dataset_drop_small_LCD[labels]
-# dataset_select = dataset_drop_small_LCD[feature]
-
 # 清洗
 for item in labels:
     dataset = data_wash(dataset, item)
 
-dataset_select = dataset[feature]
-dataset_labels = dataset[labels]
+dataset['Henry_furfural'] = np.log(dataset['Henry_furfural'] + 1)
+dataset['Henry_Tip5p'] = np.log(dataset['Henry_Tip5p']+1)
+dataset['selectivity_of_Henry'] = np.log(dataset['selectivity_of_Henry']+1)
 
-dataset_labels['Henry_furfural'] = np.log(dataset_labels['Henry_furfural'] + 1)
-dataset_labels['Henry_Tip5p'] = np.log(dataset_labels['Henry_Tip5p']+1)
-dataset_labels['selectivity_of_Henry'] = np.log(dataset_labels['selectivity_of_Henry']+1)
+# 真正想训练的内容
+for i in labels:
+    true_label = [i]
+    dataset_select = dataset[feature]
+    dataset_labels = dataset[true_label]
+    X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+    singleRA(true_label, "model_RandomForestRegressor", X_train,Y_train, X_test, Y_test, dataset_select)
 
-# # 回归分析散点图，展示不同变量之间的关系
+# labels = ['selectivity_of_Henry']
 
-# x_vars = ['LCD', 'PLD', 'LFPD', 'cm3_g',
-#           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
+# dataset_select = dataset[feature]
+# dataset_labels = dataset[labels]
 
-# fig,  axes = plt.subplots(nrows=1,  ncols=len(x_vars),  figsize=(200,  5))
+# 回归分析散点图，展示不同变量之间的关系
 
-# for i,  ax in enumerate(axes):
-#     sns.scatterplot(x=dataset[x_vars[i]],
-#                     y=dataset['Heat_furfural'],    alpha=0.6,  ax=ax)
-#     ax.set_xlabel(x_vars[i],    fontsize=12)
-#     ax.set_ylabel('Heat_furfural',    fontsize=12)
-#     ax.set_title('特征关系:' + x_vars[i] + '\n'
-#                  '和Heat_furfural', fontsize=14)
+# whatData(features=feature, label='Heat_furfural', dataset=dataset)
 
-# plt.tight_layout()
-# plt.show()
-
-# x_vars = ['LCD', 'PLD', 'LFPD', 'cm3_g',
-#           'ASA_m2_cm3', 'ASA_m2_g', 'AV_VF', 'AV_cm3_g']
-
-# fig,  axes = plt.subplots(nrows=1,  ncols=len(x_vars),  figsize=(200,  5))
-
-# for i,  ax in enumerate(axes):
-#     sns.scatterplot(x=dataset[x_vars[i]],
-#                     y=dataset['Henry_furfural'],    alpha=0.6,  ax=ax)
-#     ax.set_xlabel(x_vars[i],    fontsize=12)
-#     ax.set_ylabel('Henry_furfural',    fontsize=12)
-#     ax.set_title('特征关系:' + x_vars[i] + '\n'
-#                  '和Henry_furfural', fontsize=14)
-
-# plt.tight_layout()
-# plt.show()
+# whatData(features=feature, label='Henry_furfural', dataset=dataset)
 
 # #目标值可视化
 # plt.plot(dataset['Heat_furfural'])
@@ -101,16 +75,14 @@ dataset_labels['selectivity_of_Henry'] = np.log(dataset_labels['selectivity_of_H
 # plt.plot(dataset['Henry_furfural'])
 # plt.show()
 
-#移除低方差特征
+# 移除低方差特征
 # sel = VarianceThreshold(threshold=(.8 * (1 - .8)))
 # sel.fit_transform(dataset_select)
 
-for name in labels:
-    dataset_labels_name = [name]
-    dataset_labels_want = dataset_labels[name]
+# # 数据预处理
+# X_train, X_test, Y_train, Y_test = preprocessing(
+#     dataset_select, dataset_labels, test_size=0.2)
 
-    # 数据预处理
-    X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels_want, test_size=0.2)
-
-    # 训练分析
-    regressionAndAnalysis(dataset_labels_name, "model_RandomForestRegressor" , X_train, Y_train, X_test, Y_test, dataset_select)
+# # 训练分析
+# singleRA(labels, "model_RandomForestRegressor", X_train,
+#          Y_train, X_test, Y_test, dataset_select)
