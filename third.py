@@ -67,9 +67,13 @@ column += ['selectivity_of_Henry']
 dataset['selectivity_of_Henry'] = dataset['Henry_furfural'] / \
     dataset['Henry_Tip5p']
 
+print(dataset.describe())
+
 # 清洗
 for item in column:
     dataset = data_wash_delete(dataset, item)
+
+print(dataset.describe())
 
 dataset['Henry_furfural'] = np.log(dataset['Henry_furfural'] + 1)
 dataset['Henry_Tip5p'] = np.log(dataset['Henry_Tip5p']+1)

@@ -151,15 +151,24 @@ def pp(dataset_select, dataset_labels, test_size=0.2):
     scaler = StandardScaler()
     x_train_raw = scaler.fit_transform(x_train_raw)
     x_test_raw = scaler.transform(x_test_raw)
+    scaler = StandardScaler()
+    y_train = scaler.fit_transform(y_train)
+    y_test = scaler.transform(y_test)
     
     #正态化
     x_train_raw = quantile.fit_transform(x_train_raw)
     x_test_raw = quantile.transform(x_test_raw)
+    quantile = QuantileTransformer(output_distribution='normal')
+    y_train = quantile.fit_transform(y_train)
+    y_test = quantile.transform(y_test)
     
     #归一化
     scaler = MinMaxScaler()
     x_train_raw = scaler.fit_transform(x_train_raw)
     x_test_raw = scaler.transform(x_test_raw)
+    scaler = MinMaxScaler()
+    y_train = scaler.fit_transform(y_train)
+    y_test = scaler.transform(y_test)
 
     # #绘制转换后的训练集数据的直方图
     # plt.subplot(2, 1, 1)

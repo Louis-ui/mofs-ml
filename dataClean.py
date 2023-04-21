@@ -51,10 +51,12 @@ def data_wash_delete(data, column):
     # MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL = 5.7
     # data = data[data['LCD']>=MOLECULAR_DYNAMICS_DIAMETER_OF_FURFURAL]
 
-    # 换无限为Nan
-    data = data.replace([np.inf, -np.inf], np.nan)
     # 去重
     data = data.drop_duplicates()
+
+    # 换无限为Nan
+    data = data.replace([np.inf, -np.inf], np.nan)
+
     # 目标值为0
     def del_zero(data, column):
         querySe = data[(data[column] == 0)].index.tolist()
@@ -127,5 +129,4 @@ def data_clean_delete(data, column):
         return data_del
     data = del_zero(data, column)
     data = del_nan(data, column)
-    data = data.dropna(axis=0, how='any')
     return data
