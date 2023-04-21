@@ -52,11 +52,11 @@ def data_wash_replace(data, column):
         data.loc[outliers,  column] = median
         return data
 
+    data = del_nan(data, column)
     data[column] = data[column].replace(0, np.nan)
     data[column] = data[column].fillna(data[column].mean()) 
-    data = data.dropna(axis=0, how='any')
     data = del_nan(data, column)
-    data = replace(data, column)
+    # data = replace(data, column)
 
     return data
 
@@ -93,7 +93,11 @@ def preprocessing(dataset_select, dataset_labels, test_size=0.2):
 
     X_train, X_test = scale(X_train, X_test)
     X_train, X_test = minScale(X_train, X_test)
-    X_train, X_test = quantileF(X_train, X_test)
+    # X_train, X_test = quantileF(X_train, X_test)
+
+    Y_train, Y_test = scale(Y_train, Y_test)
+    Y_train, Y_test = minScale(Y_train, Y_test)
+    # Y_train, Y_test = quantileF(Y_train, Y_test)
 
     return X_train, X_test, Y_train, Y_test
 
@@ -130,25 +134,47 @@ def singleRAWithDiffModel(target_labels, Xtrain_prepare, Ytrain_prepare, Xtest_p
             target_label = [target_labels[index]]
             regressionAnalysis(function, target_label, Ytest_prepare, predictions)
             # 特征重要程度分析
-            # important(X_data, model) 
+            # important(X_data, model)
+
+def singleRA(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare, X_data):
+    model = models[method]
+    model.fit(Xtrain_prepare, Ytrain_prepare)
+    predictions = model.predict(Xtest_prepare)
+    for index in range(Ytest_prepare.shape[1]):
+        target_label = [target_labels[index]]
+        regressionAnalysis(method, target_label, Ytest_prepare, predictions)
+        # 特征重要程度分析
+        # important(X_data, model)
+        # importantWithShape(x_data=X_data, model=model)
 
 # 真正想训练的内容
-true_label = ['P1e+07_Con0_mg/g']
-dataset_select = dataset[feature]
-dataset_labels = dataset[true_label]
-X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
-singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
-print('----------------------------------  ')
-true_label = ['P1e+07_Con1_mg/g']
-dataset_select = dataset[feature]
-dataset_labels = dataset[true_label]
-X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
-singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
-print('----------------------------------  ')
-true_label = ['P1e+07_S_mg/g']
-dataset_select = dataset[feature]
-dataset_labels = dataset[true_label]
-X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
-singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
-print('----------------------------------  ')
+for i in labels:
+    true_label = [i]
+    dataset_select = dataset[feature]
+    dataset_labels = dataset[true_label]
+    X_train, X_test, Y_train, Y_test = preprocessing(
+        dataset_select, dataset_labels, test_size=0.2)
+    singleRA(true_label, "model_RandomForestRegressor",
+             X_train, Y_train, X_test, Y_test, dataset_select)
+    # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+
+# # 真正想训练的内容
+# true_label = ['P1e+07_Con0_mg/g']
+# dataset_select = dataset[feature]
+# dataset_labels = dataset[true_label]
+# X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+# singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+# print('----------------------------------  ')
+# true_label = ['P1e+07_Con1_mg/g']
+# dataset_select = dataset[feature]
+# dataset_labels = dataset[true_label]
+# X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+# singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+# print('----------------------------------  ')
+# true_label = ['P1e+07_S_mg/g']
+# dataset_select = dataset[feature]
+# dataset_labels = dataset[true_label]
+# X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+# singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+# print('----------------------------------  ')
 
