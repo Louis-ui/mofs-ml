@@ -40,20 +40,22 @@ models = {
 
 def classificate(Xtrain, Ytrain, Xtest, Ytest, data):
 
-    # 训练模型
-    model = models["random_forest"]
-    model.fit(Xtrain, Ytrain)
+    for function in models:
+        model = models[function]
+                # 训练模型
+        # model = models["decision_tree"]
+        model.fit(Xtrain, Ytrain)
 
-    # 预测并输出分类结果报告
-    # print("模型评估")
-    predictions = model.predict(Xtest)
+        # 预测并输出分类结果报告
+        # print("模型评估")
+        predictions = model.predict(Xtest)
 
-    # print("predictions")
-    # print(predictions)
+        # print("predictions")
+        # print(predictions)
 
-    regressionAnalysis("random_forest", 'type', Ytest, predictions)
+        regressionAnalysis(function, ['type'], Ytest, predictions)
 
-    calc_feature_importance_shap(model, data)
+        # calc_feature_importance_shap(model, data)
 
 
 def calc_feature_importance_shap(tree_model, data):

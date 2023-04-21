@@ -51,20 +51,35 @@ for item in column:
 # sel.fit_transform(dataset_select)
 
 # 真正想训练的内容
-for i in labels:
-    true_label = [i]
-    dataset_select = dataset[feature]
-    dataset_labels = dataset[true_label]
-    X_train, X_test, Y_train, Y_test = preprocessing(
-        dataset_select, dataset_labels, test_size=0.2)
-    singleRA(true_label, "model_RandomForestRegressor",
-             X_train, Y_train, X_test, Y_test, dataset_select)
+# for i in labels:
+#     true_label = [i]
+#     dataset_select = dataset[feature]
+#     dataset_labels = dataset[true_label]
+#     X_train, X_test, Y_train, Y_test = preprocessing(
+#         dataset_select, dataset_labels, test_size=0.2)
+#     singleRA(true_label, "model_RandomForestRegressor",
+#              X_train, Y_train, X_test, Y_test, dataset_select)
     # singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
 
 
 # 真正想训练的内容
-# true_label = ['P1e+07_Con0_mg/g']
-# dataset_select = dataset[feature]
-# dataset_labels = dataset[true_label]
-# X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
-# singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+true_label = ['P1e+07_Con0_mg/g']
+dataset_select = dataset[feature]
+dataset_labels = dataset[true_label]
+X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+print('----------------------------------  ')
+true_label = ['P1e+07_Con1_mg/g']
+dataset_select = dataset[feature]
+dataset_labels = dataset[true_label]
+X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+print('----------------------------------  ')
+true_label = ['P1e+07_S_mg/g']
+dataset_select = dataset[feature]
+dataset_labels = dataset[true_label]
+X_train, X_test, Y_train, Y_test = preprocessing(dataset_select, dataset_labels, test_size=0.2)
+singleRAWithDiffModel(true_label, X_train,Y_train, X_test, Y_test, dataset_select)
+print('----------------------------------  ')
+
+

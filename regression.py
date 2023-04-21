@@ -43,7 +43,7 @@ def singleRA(target_labels, method, Xtrain_prepare, Ytrain_prepare, Xtest_prepar
         target_label = [target_labels[index]]
         regressionAnalysis(method, target_label, Ytest_prepare, predictions)
         # 特征重要程度分析
-        important(X_data, model)
+        # important(X_data, model)
         # importantWithShape(x_data=X_data, model=model)
 
 def singleRAWithDiffModel(target_labels, Xtrain_prepare, Ytrain_prepare, Xtest_prepare, Ytest_prepare, X_data):

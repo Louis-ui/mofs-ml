@@ -92,7 +92,7 @@ def preprocessing(dataset_select, dataset_labels, test_size=0.2):
     # X_train, X_test = imp(X_train, X_test)
     X_train, X_test = scale(X_train, X_test)
     X_train, X_test = minScale(X_train, X_test)
-    # X_train, X_test = quantileF(X_train, X_test)
+    X_train, X_test = quantileF(X_train, X_test)
     # # Y_train, Y_test = normal_qt(Y_train, Y_test)
 
     # #绘制转换后的训练集数据的直方图

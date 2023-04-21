@@ -1,0 +1,165 @@
+P1e+07_Con0_mg/g训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 2116.261258
+均方误差MSE: 2116.261258
+平均绝对误差MAE: 37.756173
+R2: -0.096654
+P1e+07_Con0_mg/g训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 2505.151348
+均方误差MSE: 2505.151348
+平均绝对误差MAE: 35.603217
+R2: -0.298178
+P1e+07_Con0_mg/g训练的结果
+使用model_SVR训练
+均方根误差RMSE: 2077.335306
+均方误差MSE: 2077.335306
+平均绝对误差MAE: 34.002868
+R2: -0.076483
+P1e+07_Con0_mg/g训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 1333.661103
+均方误差MSE: 1333.661103
+平均绝对误差MAE: 26.936567
+R2: 0.308892
+P1e+07_Con0_mg/g训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 1496.473273
+均方误差MSE: 1496.473273
+平均绝对误差MAE: 26.710197
+R2: 0.224522
+P1e+07_Con0_mg/g训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 1903.597615
+均方误差MSE: 1903.597615
+平均绝对误差MAE: 33.254527
+R2: 0.013549
+P1e+07_Con0_mg/g训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 2846.020843
+均方误差MSE: 2846.020843
+平均绝对误差MAE: 36.893753
+R2: -0.474818
+P1e+07_Con0_mg/g训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 1341.588188
+均方误差MSE: 1341.588188
+平均绝对误差MAE: 30.941096
+R2: 0.304784
+P1e+07_Con0_mg/g训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 2404.673101
+均方误差MSE: 2404.673101
+平均绝对误差MAE: 34.871771
+R2: -0.246110
+----------------------------------
+P1e+07_Con1_mg/g训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 12546.890164
+均方误差MSE: 12546.890164
+平均绝对误差MAE: 87.205181
+R2: -0.037081
+P1e+07_Con1_mg/g训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 14884.607228
+均方误差MSE: 14884.607228
+平均绝对误差MAE: 93.107960
+R2: -0.230308
+P1e+07_Con1_mg/g训练的结果
+使用model_SVR训练
+均方根误差RMSE: 12096.555111
+均方误差MSE: 12096.555111
+平均绝对误差MAE: 86.052031
+R2: 0.000142
+P1e+07_Con1_mg/g训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 11670.767734
+均方误差MSE: 11670.767734
+平均绝对误差MAE: 81.447017
+R2: 0.035336
+P1e+07_Con1_mg/g训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 13735.887810
+均方误差MSE: 13735.887810
+平均绝对误差MAE: 89.415230
+R2: -0.135359
+P1e+07_Con1_mg/g训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 13255.411720
+均方误差MSE: 13255.411720
+平均绝对误差MAE: 85.975786
+R2: -0.095645
+P1e+07_Con1_mg/g训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 19568.312425
+均方误差MSE: 19568.312425
+平均绝对误差MAE: 102.617471
+R2: -0.617447
+P1e+07_Con1_mg/g训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 14161.870195
+均方误差MSE: 14161.870195
+平均绝对误差MAE: 89.737142
+R2: -0.170570
+P1e+07_Con1_mg/g训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 34603.551595
+均方误差MSE: 34603.551595
+平均绝对误差MAE: 146.030136
+R2: -1.860206
+----------------------------------
+P1e+07_S_mg/g训练的结果
+使用model_LinearRegression训练
+均方根误差RMSE: 0.332946
+均方误差MSE: 0.332946
+平均绝对误差MAE: 0.478472
+R2: -0.012973
+P1e+07_S_mg/g训练的结果
+使用model_DecisionTreeRegressor训练
+均方根误差RMSE: 0.692460
+均方误差MSE: 0.692460
+平均绝对误差MAE: 0.665403
+R2: -1.106781
+P1e+07_S_mg/g训练的结果
+使用model_SVR训练
+均方根误差RMSE: 0.234038
+均方误差MSE: 0.234038
+平均绝对误差MAE: 0.379615
+R2: 0.287950
+P1e+07_S_mg/g训练的结果
+使用model_KNeighborsRegressor训练
+均方根误差RMSE: 0.268702
+均方误差MSE: 0.268702
+平均绝对误差MAE: 0.368072
+R2: 0.182485
+P1e+07_S_mg/g训练的结果
+使用model_RandomForestRegressor训练
+均方根误差RMSE: 0.331123
+均方误差MSE: 0.331123
+平均绝对误差MAE: 0.443988
+R2: -0.007428
+P1e+07_S_mg/g训练的结果
+使用model_AdaBoostRegressor训练
+均方根误差RMSE: 0.295803
+均方误差MSE: 0.295803
+平均绝对误差MAE: 0.424601
+R2: 0.100032
+P1e+07_S_mg/g训练的结果
+使用model_GradientBoostingRegressor训练
+均方根误差RMSE: 0.347988
+均方误差MSE: 0.347988
+平均绝对误差MAE: 0.493483
+R2: -0.058740
+P1e+07_S_mg/g训练的结果
+使用model_BaggingRegressor训练
+均方根误差RMSE: 0.329795
+均方误差MSE: 0.329795
+平均绝对误差MAE: 0.435894
+R2: -0.003388
+P1e+07_S_mg/g训练的结果
+使用model_ExtraTreeRegressor训练
+均方根误差RMSE: 0.496627
+均方误差MSE: 0.496627
+平均绝对误差MAE: 0.544158
+R2: -0.510968
+----------------------------------
